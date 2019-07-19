@@ -28,22 +28,16 @@ class TestAddContact(unittest.TestCase):
         self.logout(wd)
 
     def test_add_empty_contact(self):
-            wd = self.wd
-            self.open_home_page(wd)
-            self.login(wd, username="admin", password="secret")
-            self.contact_creation(wd)
-            self.create_contact(wd, Contact(firstname="", middlename="", lastname="", nickname="",
-                                            title="", company="", adress="",
-                                            phone_home="", phone_mobile="",
-                                            phone_work="", fax="",
-                                            email="", emal2="",
-                                            email3="", homepage="",
-                                            bday="", bmonth="-", byear="", aday="", amonth="-",
-                                            ayear="", group="[none]", adresess2="",
-                                            phone2="",
-                                            notes=""))
-            self.return_home_page(wd)
-            self.logout(wd)
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.contact_creation(wd)
+        self.create_contact(wd, Contact(firstname="", middlename="", lastname="", nickname="", title="", company="",
+                                        adress="", phone_home="", phone_mobile="", phone_work="", fax="", email="",
+                                        emal2="", email3="", homepage="", bday="", bmonth="-", byear="", aday="",
+                                        amonth="-", ayear="", group="[none]", adresess2="", phone2="", notes=""))
+        self.return_home_page(wd)
+        self.logout(wd)
 
     def create_contact(self, wd, contact):
         # fill contact form
