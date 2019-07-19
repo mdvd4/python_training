@@ -61,6 +61,9 @@ class TestAddGroup(unittest.TestCase):
     def open_home_page(self, wd):
         wd.get("http://localhost/addressbook/")
 
+    def tearDown(self):
+        self.wd.quit()
+
 
 if __name__ == "__main__":
     unittest.main()
