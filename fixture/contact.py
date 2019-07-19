@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from selenium.webdriver.support.ui import Select
 
 
@@ -9,7 +10,26 @@ class ContactHelper:
     def create(self, contact):
         wd = self.app.wd
         self.add_new()
+        # select contact group
+        wd.find_element_by_name("new_group").click()
+        Select(wd.find_element_by_name("new_group")).select_by_visible_text("[none]")
+        self.fill_contact_form(contact)
+        # submit contact creation
+        wd.find_element_by_xpath("(//input[@name='submit'])").click()
+        self.return_home_page()
+
+
+    def first_edit(self, contact):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
         # fill contact form
+        self.fill_contact_form(contact)
+        # submit contact update
+        wd.find_element_by_xpath("(//input[@name='update'])").click()
+        self.return_home_page()
+
+    def fill_contact_form(self, contact):
+        wd = self.app.wd
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact.firstname)
         wd.find_element_by_name("middlename").clear()
@@ -52,17 +72,12 @@ class ContactHelper:
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(contact.ayear)
-        wd.find_element_by_name("new_group").click()
-        Select(wd.find_element_by_name("new_group")).select_by_visible_text(contact.group)
         wd.find_element_by_name("address2").clear()
         wd.find_element_by_name("address2").send_keys(contact.adresess2)
         wd.find_element_by_name("phone2").clear()
         wd.find_element_by_name("phone2").send_keys(contact.phone2)
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
-        # submit contact creation
-        wd.find_element_by_xpath("(//input[@name='submit'])").click()
-        self.return_home_page()
 
     def return_home_page(self):
         wd = self.app.wd
