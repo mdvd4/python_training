@@ -26,7 +26,6 @@ class Contact:
         self.aday = aday
         self.amonth = amonth
         self.ayear = ayear
-        #self.group = group
         self.adresess2 = adresess2
         self.phone2 = phone2
         self.notes = notes
