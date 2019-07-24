@@ -8,8 +8,9 @@ def test_delete_first_contact(app):
                 phone_mobile="+1(123)456-78-90", phone_work="+1(123)456-78-90", fax="+1(123)456-78-90",
                 email="someEmai.@mail.com", emal2="someEmai.@mail.com", email3="someEmai.@mail.com",
                 homepage="http://someUrl.com", bday="1", bmonth="January", byear="1950", aday="1", amonth="January",
-                ayear="1960", adresess2="someAdress", phone2="+1(123)456-78-90", notes="someNotes"),)
+                ayear="1960", adresess2="someAdress", phone2="+1(123)456-78-90", notes="someNotes"), )
     app.contact.first_delete()
+
 
 def test_delete_all_contact(app):
     app.contact.create(
@@ -18,7 +19,7 @@ def test_delete_all_contact(app):
                 phone_mobile="+1(123)456-78-90", phone_work="+1(123)456-78-90", fax="+1(123)456-78-90",
                 email="someEmai.@mail.com", emal2="someEmai.@mail.com", email3="someEmai.@mail.com",
                 homepage="http://someUrl.com", bday="1", bmonth="January", byear="1950", aday="1", amonth="January",
-                ayear="1960", adresess2="someAdress", phone2="+1(123)456-78-90", notes="someNotes"),)
+                ayear="1960", adresess2="someAdress", phone2="+1(123)456-78-90", notes="someNotes"), )
     app.contact.create(
         Contact(firstname="", middlename="", lastname="", nickname="", title="", company="", adress="", phone_home="",
                 phone_mobile="", phone_work="", fax="", email="", emal2="", email3="", homepage="", bday="", bmonth="-",
