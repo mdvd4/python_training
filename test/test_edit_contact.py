@@ -4,7 +4,6 @@ from model.contact import Contact
 
 
 def test_edit_first_contact(app):
-    app.session.login(username="admin", password="secret")
     app.contact.create(
         Contact(firstname="John", middlename="Patrick", lastname="Dow", nickname="JohnDow", title="someTitle",
                 company="someCompany", adress="someAdress", phone_home="+1(123)456-78-90",
@@ -19,4 +18,3 @@ def test_edit_first_contact(app):
                 email="someEmail2.@mail.com", emal2="someEmail2.@mail.com", email3="someEmail2.@mail.com",
                 homepage="http://someUrl2.com", bday="10", bmonth="April", byear="1955", aday="10", amonth="April",
                 ayear="1965", adresess2="someAdress2", phone2="+1(123)456-78-99", notes="someNotes2"))
-    app.session.logout()
