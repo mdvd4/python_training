@@ -58,14 +58,3 @@ class GroupHelper:
         # submit modification
         wd.find_element_by_name("update").click()
         self.return_groups_page()
-
-    def edit_first_group(self, group):
-        wd = self.app.wd
-        self.open_group_page()
-        self.select_first_group()
-        # submit edit group
-        wd.find_element_by_name("edit").click()
-        self.fill_group_form(group)
-        # submit_update
-        wd.find_element_by_name("update").click()
-        self.return_groups_page()
