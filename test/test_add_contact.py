@@ -18,3 +18,8 @@ def test_add_empty_contact(app):
         Contact(firstname="", middlename="", lastname="", nickname="", title="", company="", adress="", phone_home="",
                 phone_mobile="", phone_work="", fax="", email="", emal2="", email3="", homepage="", bday="", bmonth="-",
                 byear="", aday="", amonth="-", ayear="", adresess2="", phone2="", notes=""))
+
+
+def test_add_contact_only_name(app):
+    app.contact.create(
+        Contact(firstname="Jonatan",  bday="", bmonth="-", aday="", amonth="-"))
