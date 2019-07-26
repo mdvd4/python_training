@@ -10,9 +10,6 @@ class ContactHelper:
     def create(self, contact):
         wd = self.app.wd
         self.add_new()
-        # select contact group
-        wd.find_element_by_name("new_group").click()
-        Select(wd.find_element_by_name("new_group")).select_by_visible_text("[none]")
         self.fill_contact_form(contact)
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])").click()
@@ -46,17 +43,10 @@ class ContactHelper:
         self.change_field_value("homepage", contact.homepage)
         self.change_select_value("bday", contact.bday)
         self.change_select_value("bmonth", contact.bmonth)
-        # wd.find_element_by_name("bmonth").click()
-        # Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
-        # self.change_field_value("byear", contact.byear)
-        # select пока не трогаем
         self.change_select_value("aday", contact.aday)
         self.change_select_value("amonth", contact.amonth)
-        # wd.find_element_by_name("aday").click()
-        # Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
-        # wd.find_element_by_name("amonth").click()
-        # Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
         self.change_field_value("ayear", contact.ayear)
+        self.change_select_value("new_group", contact.group)
         self.change_field_value("address2", contact.adresess2)
         self.change_field_value("phone2", contact.phone2)
         self.change_field_value("notes", contact.notes)
