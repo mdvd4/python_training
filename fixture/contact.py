@@ -62,25 +62,28 @@ class ContactHelper:
 
     def first_delete(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.return_home_page()
         # select_first_contact
         wd.find_element_by_name("selected[]").click()
         # submit delete
-        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        self.submit_delete()
         # submit OK on alert
         wd.switch_to_alert().accept()
         self.return_home_page()
 
     def all_delete(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.return_home_page()
         # select_all_contact
         wd.find_element_by_id("MassCB").click()
-        # submit delete
-        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        self.submit_delete()
         # submit OK on alert
         wd.switch_to_alert().accept()
         self.return_home_page()
+
+    def submit_delete(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
 
     # Метод абсолютно идентичен методу в group возможно нужно отрефакторить и вынести?
     def change_field_value(self, field_name, text):
