@@ -44,17 +44,18 @@ class ContactHelper:
         self.change_field_value("email2", contact.emal2)
         self.change_field_value("email3", contact.email3)
         self.change_field_value("homepage", contact.homepage)
+        self.change_select_value("bday", contact.bday)
+        self.change_select_value("bmonth", contact.bmonth)
+        # wd.find_element_by_name("bmonth").click()
+        # Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
+        # self.change_field_value("byear", contact.byear)
         # select пока не трогаем
-        wd.find_element_by_name("bday").click()
-        Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
-        wd.find_element_by_name("bmonth").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
-        self.change_field_value("byear", contact.byear)
-        # select пока не трогаем
-        wd.find_element_by_name("aday").click()
-        Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
-        wd.find_element_by_name("amonth").click()
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
+        self.change_select_value("aday", contact.aday)
+        self.change_select_value("amonth", contact.amonth)
+        # wd.find_element_by_name("aday").click()
+        # Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
+        # wd.find_element_by_name("amonth").click()
+        # Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
         self.change_field_value("ayear", contact.ayear)
         self.change_field_value("address2", contact.adresess2)
         self.change_field_value("phone2", contact.phone2)
@@ -98,3 +99,9 @@ class ContactHelper:
             wd.find_element_by_name(field_name).click()
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
+
+    def change_select_value(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            Select(wd.find_element_by_name(field_name)).select_by_visible_text(text)
