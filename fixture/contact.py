@@ -114,7 +114,6 @@ class ContactHelper:
             cells = []
             for cell in element.find_elements_by_tag_name('td'):
                 cells.append(cell.text)
-            print(cells)
             contact_id = element.find_element_by_name("selected[]").get_attribute('value')
             contact_lastname = cells[1]
             contact_firstname = cells[2]
