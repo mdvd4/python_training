@@ -15,6 +15,7 @@ class ContactHelper:
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])").click()
         self.return_home_page()
+        self.contacts_cache = None
 
     def first_edit(self, contact):
         wd = self.app.wd
@@ -24,6 +25,7 @@ class ContactHelper:
         # submit contact update
         wd.find_element_by_xpath("(//input[@name='update'])").click()
         self.return_home_page()
+        self.contacts_cache = None
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
@@ -72,6 +74,7 @@ class ContactHelper:
         # submit OK on alert
         wd.switch_to_alert().accept()
         self.return_home_page()
+        self.contacts_cache = None
 
     def all_delete(self):
         wd = self.app.wd
@@ -82,6 +85,7 @@ class ContactHelper:
         # submit OK on alert
         wd.switch_to_alert().accept()
         self.return_home_page()
+        self.contacts_cache = None
 
     def submit_delete(self):
         wd = self.app.wd
@@ -106,16 +110,19 @@ class ContactHelper:
         self.return_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contacts_cache = None
+
     def get_contacts_list(self):
         wd = self.app.wd
-        self.return_home_page()
-        contacts = []
-        for element in wd.find_elements_by_name('entry'):
-            cells = []
-            for cell in element.find_elements_by_tag_name('td'):
-                cells.append(cell.text)
-            contact_id = element.find_element_by_name("selected[]").get_attribute('value')
-            contact_lastname = cells[1]
-            contact_firstname = cells[2]
-            contacts.append(Contact(id=contact_id, lastname=contact_lastname, firstname=contact_firstname))
-        return contacts
+        if self.contacts_cache is None:
+            self.return_home_page()
+            self.contacts_cache = []
+            for element in wd.find_elements_by_name('entry'):
+                cells = []
+                for cell in element.find_elements_by_tag_name('td'):
+                    cells.append(cell.text)
+                contact_id = element.find_element_by_name("selected[]").get_attribute('value')
+                contact_lastname = cells[1]
+                contact_firstname = cells[2]
+                self.contacts_cache.append(Contact(id=contact_id, lastname=contact_lastname, firstname=contact_firstname))
+        return list(self.contacts_cache)
