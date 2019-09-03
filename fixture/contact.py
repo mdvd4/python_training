@@ -22,13 +22,24 @@ class ContactHelper:
 
     def edit_by_index(self, index, contact):
         wd = self.app.wd
-        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
-        # fill contact form
+        self.open_contact_edit_by_index(index)
         self.fill_contact_form(contact)
         # submit contact update
         wd.find_element_by_xpath("(//input[@name='update'])").click()
         self.return_home_page()
         self.contacts_cache = None
+
+    def open_contact_edit_by_index(self, index):
+        wd = self.app.wd
+        row = wd.find_elements_by_name('entry')[index]
+        cells = row.find_elements_by_tag_name('td')
+        cells[7].find_element_by_tag_name('a').click()
+
+    def open_contact_view_by_index(self, index):
+        wd = self.app.wd
+        row = wd.find_elements_by_name('entry')[index]
+        cells = row.find_elements_by_tag_name('td')
+        cells[6].find_element_by_tag_name('a').click()
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
@@ -73,8 +84,9 @@ class ContactHelper:
     def delete_by_index(self, index):
         wd = self.app.wd
         self.return_home_page()
-        # select_first_contact
-        wd.find_elements_by_name("selected[]")[index].click()
+        row = wd.find_elements_by_name('entry')[index]
+        cells = row.find_elements_by_tag_name('td')
+        cells[0].find_element_by_name("selected[]").click()
         # submit delete
         self.submit_delete()
         # submit OK on alert
@@ -123,12 +135,10 @@ class ContactHelper:
         if self.contacts_cache is None:
             self.return_home_page()
             self.contacts_cache = []
-            for element in wd.find_elements_by_name('entry'):
-                cells = []
-                for cell in element.find_elements_by_tag_name('td'):
-                    cells.append(cell.text)
-                contact_id = element.find_element_by_name("selected[]").get_attribute('value')
-                contact_lastname = cells[1]
-                contact_firstname = cells[2]
+            for row in wd.find_elements_by_name("entry"):
+                cells = row.find_elements_by_tag_name("td")
+                contact_id = cells[0].find_element_by_name("selected[]").get_attribute('value')
+                contact_lastname = cells[1].text
+                contact_firstname = cells[2].text
                 self.contacts_cache.append(Contact(id=contact_id, lastname=contact_lastname, firstname=contact_firstname))
         return list(self.contacts_cache)
